@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嘉拾設計公司 | KASHITSU DESIGN</title>
+    <style>
+        /* 日式素雅配色方案 */
+        :root {
+            --bg-body: #ececec;
+            --bg-card: #f9f8f4; /* 象牙白 */
+            --text-main: #4a4a4a; /* 木炭灰 */
+            --text-sub: #8c8c8c; /* 侘寂灰 */
+            --accent: #a6937c; /* 淺駝色 */
+            --border: #e0ddd5;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        /* 網頁小卡容器 */
+        .card {
+            background: var(--bg-card);
+            width: 100%;
+            max-width: 400px;
+            min-height: 650px;
+            margin: 20px;
+            border-radius: 4px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        /* 品牌頭部 */
+        .brand-header {
+            padding: 35px 20px 15px;
+            text-align: center;
+            letter-spacing: 0.25em;
+        }
+
+        .brand-header h1 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        .brand-header span {
+            font-size: 0.7rem;
+            color: var(--text-sub);
+            display: block;
+            margin-top: 8px;
+        }
+
+        /* 分頁導航 */
+        .nav-tabs {
+            display: flex;
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab-item {
+            flex: 1;
+            padding: 12px 0;
+            font-size: 0.8rem;
+            text-align: center;
+            cursor: pointer;
+            color: var(--text-sub);
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-item.active {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        /* 內容區 */
+        .content-container {
+            flex-grow: 1;
+            padding: 25px;
+            position: relative;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 0.1em;
+        }
+
+        /* 作品集陳列窗口 */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .work-item {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 8px;
+        }
+
+        .work-img {
+            width: 100%;
+            aspect-ratio: 3/2;
+            background: #eee;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #bbb;
+        }
+
+        .work-info .title { font-size: 0.75rem; color: var(--text-main); }
+        .work-info .cat { font-size: 0.6rem; color: var(--accent); }
+
+        /* 價目表樣式 */
+        .price-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border);
+            font-size: 0.9rem;
+        }
+
+        .price-val { color: var(--accent); font-weight: 500; }
+
+        /* 須知與 FAQ */
+        .text-block {
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .faq-q { font-weight: 500; color: var(--text-main); margin-top: 15px; }
+
+        /* 按鈕樣式 */
+        .btn-booking {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.65rem;
+            color: #bbb;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <header class="brand-header">
+        <h1>嘉拾設計公司</h1>
+        <span>KASHITSU DESIGN STUDIO</span>
+    </header>
+
+    <nav class="nav-tabs">
+        <div class="tab-item active" onclick="switchTab(event, 'portfolio')">作品集</div>
+        <div class="tab-item" onclick="switchTab(event, 'pricing')">價目表</div>
+        <div class="tab-item" onclick="switchTab(event, 'notice')">預約須知</div>
+        <div class="tab-item" onclick="switchTab(event, 'faq')">常見問題</div>
+    </nav>
+
+    <main class="content-container">
+        
+        <div id="portfolio" class="tab-content active">
+            <h2>精選作品陳列</h2>
+            <div class="portfolio-grid">
+                <div class="work-item">
+                    <div class="work-img">名片設計展示</div>
+                    <div class="work-info">
+                        <div class="cat">主要服務</div>
+                        <div class="title">極簡特種紙名片</div>
+                    </div>
+                </div>
+                <div class="work-item">
+                    <div class="work-img">LOGO 展示</div>
+                    <div class="work-info">
+                        <div class="cat">輔助服務</div>
+                        <div class="title">品牌標誌系統</div>
+                    </div>
+                </div>
+                <div class="work-item">
+                    <div class="work-img">視覺設計</div>
+                    <div class="work-info">
+                        <div class="cat">輔助服務</div>
+                        <div class="title">主視覺海報排版</div>
+                    </div>
+                </div>
+                <div class="work-item">
+                    <div class="work-img">名片設計</div>
+                    <div class="work-info">
+                        <div class="cat">主要服務</div>
+                        <div class="title">燙金工藝名片</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="btn-booking">立即預約諮詢</a>
+        </div>
+
+        <div id="pricing" class="tab-content">
+            <h2>服務項目報價</h2>
+            <ul class="price-list">
+                <li class="price-item"><span>名片設計 (Business Card)</span> <span class="price-val">NT$ 2,500+</span></li>
+                <li class="price-item"><span>標誌設計 (Logo Design)</span> <span class="price-val">NT$ 8,000+</span></li>
+                <li class="price-item"><span>視覺識別系統 (VI)</span> <span class="price-val">NT$ 15,000+</span></li>
+                <li class="price-item"><span>社群圖文視覺</span> <span class="price-val">NT$ 1,200+</span></li>
+            </ul>
+            <p class="text-block" style="margin-top: 20px; font-size: 0.75rem;">* 實際報價依據設計需求複雜度調整。</p>
+        </div>
+
+        <div id="notice" class="tab-content">
+            <h2>合作預約須知</h2>
+            <div class="text-block">
+                <p>1. 為了維持品質，每月僅承接 5 組案件。</p>
+                <p>2. 確認委託後需支付 30% 定金，方可排進檔期。</p>
+                <p>3. 溝通期間請提供明確的品牌風格參考或色系需求。</p>
+                <p>4. 尊重專業與彼此的時間，是美好作品的開始。</p>
+            </div>
+        </div>
+
+        <div id="faq" class="tab-content">
+            <h2>常見問題解答</h2>
+            <div class="text-block">
+                <div class="faq-q">Q: 修改次數如何計算？</div>
+                <div class="faq-a">A: 每個專案包含 3 次微調，超次將酌收修改費。</div>
+                <div class="faq-q">Q: 結案後會提供原始檔嗎？</div>
+                <div class="faq-a">A: 會的，我們會交付 AI 向量檔或高解析度 PDF。</div>
+                <div class="faq-q">Q: 設計工期大約多久？</div>
+                <div class="faq-a">A: 名片約 5-7 天，LOGO 約 14-21 個工作天。</div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        © 2026 嘉拾設計公司 | 拾起設計的溫度
+    </footer>
+</div>
+
+<script>
+    function switchTab(evt, tabId) {
+        // 隱藏所有內容
+        const contents = document.getElementsByClassName("tab-content");
+        for (let content of contents) {
+            content.classList.remove("active");
+        }
+
+        // 取消所有標籤激活狀態
+        const tabs = document.getElementsByClassName("tab-item");
+        for (let tab of tabs) {
+            tab.classList.remove("active");
+        }
+
+        // 顯示當前內容並激活標籤
+        document.getElementById(tabId).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+</script>
+
+</body>
+</html>
